@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Privacy policy | {{ business.name }}{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="container-x max-w-3xl space-y-4 leading-relaxed">
+    <h1 class="h1">Privacy policy</h1>
+    <p class="text-sm text-muted">This is a sample policy for a demonstration project, not legal advice.</p>
+    <h2 class="text-xl font-semibold">What we collect</h2>
+    <p>When you send a service request we collect your name, email, phone number, property address and the details of the job.</p>
+    <h2 class="text-xl font-semibold">Why we collect it</h2>
+    <p>We use this information only to review your request, contact you and arrange the work you asked about.</p>
+    <h2 class="text-xl font-semibold">Who can see it</h2>
+    <p>Only authorised staff can view requests. We do not sell your information.</p>
+    <h2 class="text-xl font-semibold">Questions</h2>
+    <p>Contact us at {{ business.email }} to ask about or request removal of your information.</p>
+  </div>
+</section>
+{% endblock %}

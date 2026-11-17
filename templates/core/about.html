@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}About | {{ business.name }}{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="container-x max-w-3xl">
+    <h1 class="h1">About {{ business.name }}</h1>
+    <p class="mt-4 leading-relaxed">{{ business.name }} helps homeowners and renters keep their homes in good shape. From small repairs to furniture assembly and light improvements, we focus on careful work and clear communication.</p>
+    <h2 class="h2 mt-10">How we work</h2>
+    <ul class="mt-4 list-disc space-y-2 pl-5">
+      <li>Every request is reviewed by our team before anything is scheduled.</li>
+      <li>We contact you to agree the scope, date and time.</li>
+      <li>Specialised trades are only offered through appropriately qualified professionals.</li>
+    </ul>
+    <div class="card mt-10">
+      <p class="font-semibold">A demonstration project</p>
+      <p class="mt-2 text-sm text-muted">{{ business.name }} is a fictional company created for a portfolio project. It is not a real business and does not take real bookings.</p>
+    </div>
+  </div>
+</section>
+{% include 'components/cta_band.html' %}
+{% endblock %}

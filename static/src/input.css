@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-forest: #14532D;
+  --color-brand: #15803D;
+  --color-mint: #86EFAC;
+  --color-canvas: #F8FAF9;
+  --color-ink: #17211B;
+  --color-muted: #647067;
+  --color-line: #E5EAE6;
+  --color-sage: #E4ECE6;
+  --color-sage-card: #F4F7F5;
+  --color-sage-line: #D3DDD6;
+  --color-sage-muted: #526058;
+}
+
+@layer base {
+  body { @apply bg-canvas text-ink font-sans antialiased; }
+  [x-cloak] { display: none !important; }
+}
+
+@layer components {
+  .container-x { @apply mx-auto max-w-6xl px-4 sm:px-6; }
+  .section { @apply py-14 sm:py-20; }
+  .btn { @apply inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand; }
+  .btn-primary { @apply bg-brand text-white hover:bg-forest; }
+  .btn-light { @apply bg-mint text-forest hover:bg-white; }
+  .btn-outline { @apply border border-brand text-brand hover:bg-brand hover:text-white; }
+  .btn-outline-light { @apply border border-mint text-mint hover:bg-mint hover:text-forest; }
+  .card { @apply rounded-xl border border-line bg-white p-6; }
+  .card-sage { @apply rounded-xl border border-sage-line bg-sage-card p-6; }
+  .nav-link { @apply text-sm font-medium text-ink hover:text-brand; }
+  .nav-active { @apply text-brand; }
+  .h1 { @apply text-3xl font-bold leading-tight sm:text-4xl; }
+  .h2 { @apply text-2xl font-bold sm:text-3xl; }
+}

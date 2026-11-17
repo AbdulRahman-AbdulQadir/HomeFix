@@ -1,0 +1,5 @@
+<a href="{% url 'services:detail' service.slug %}" class="card-sage block transition hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-brand">
+  <span class="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-brand text-white">{% include 'components/icon.html' with name=service.icon %}</span>
+  <h3 class="mt-4 font-semibold">{{ service.name }}</h3>
+  <p class="mt-1 text-sm text-sage-muted">{{ service.short_description }}</p>
+</a>

@@ -1,0 +1,6 @@
+{% with name=request.resolver_match.url_name app=request.resolver_match.app_name %}
+<a href="{% url 'core:home' %}" class="nav-link{% if name == 'home' %} nav-active{% endif %}">Home</a>
+<a href="{% url 'services:list' %}" class="nav-link{% if app == 'services' %} nav-active{% endif %}">Services</a>
+<a href="{% url 'core:about' %}" class="nav-link{% if name == 'about' %} nav-active{% endif %}">About</a>
+<a href="{% url 'core:contact' %}" class="nav-link{% if name == 'contact' %} nav-active{% endif %}">Contact</a>
+{% endwith %}

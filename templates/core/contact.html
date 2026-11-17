@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Contact | {{ business.name }}{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="container-x">
+    <h1 class="h1">Contact us</h1>
+    <p class="mt-2 text-muted">The fastest way to reach us is to send a service request.</p>
+    <div class="mt-8 grid gap-4 sm:grid-cols-3">
+      <div class="card"><h2 class="font-semibold">Phone</h2><p class="mt-2 text-sm">{{ business.phone }}</p></div>
+      <div class="card"><h2 class="font-semibold">Email</h2><p class="mt-2 text-sm">{{ business.email }}</p></div>
+      <div class="card"><h2 class="font-semibold">Hours</h2><p class="mt-2 text-sm">{{ business.hours }}</p></div>
+    </div>
+    <p class="mt-4 text-xs text-muted">These are sample details for a demonstration project.</p>
+  </div>
+</section>
+{% include 'components/cta_band.html' %}
+{% endblock %}
