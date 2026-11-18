@@ -1,12 +1,14 @@
-from django.shortcuts import render
-
+from django.contrib.admin.views.decorators import staff_member_required
+from django.db.models import Count, Q
 from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import FormView, TemplateView
 
 from services.models import Service
 
 from .forms import ServiceRequestForm
+from .models import ServiceRequest
 
 
 class RequestCreateView(FormView):
@@ -39,3 +41,16 @@ class RequestReceivedView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['request_id'] = self.request.session.get('last_request_id')
         return context
+
+@staff_member_required
+def dashboard(request):
+    """Simple staff-only overview of request activity."""
+    Status = ServiceRequest.Status
+    stats = ServiceRequest.objects.aggregate(
+        total=Count('id'),
+        pending=Count('id', filter=Q(status=Status.PENDING)),
+        scheduled=Count('id', filter=Q(status=Status.SCHEDULED)),
+        completed=Count('id', filter=Q(status=Status.COMPLETED)),
+    )
+    recent = ServiceRequest.objects.select_related('service')[:5]
+    return render(request, 'bookings/dashboard.html', {'stats': stats, 'recent': recent})
