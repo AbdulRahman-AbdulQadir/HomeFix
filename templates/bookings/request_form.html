@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}Request a service | {{ business.name }}{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="container-x max-w-2xl">
+    <h1 class="h1">Request a service</h1>
+    <p class="mt-3 text-muted">Tell us what you need. Sending a request does not book an appointment: we will review it and contact you to agree the details.</p>
+
+    {% if form.errors %}
+    <div class="mt-6 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-800" role="alert">
+      <p class="font-semibold">Please check the form and try again.</p>
+      {% for error in form.non_field_errors %}<p class="mt-1">{{ error }}</p>{% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="post" class="mt-8 space-y-8" novalidate>
+      {% csrf_token %}
+      <div class="hidden" aria-hidden="true">{{ form.website }}</div>
+
+      <fieldset class="card space-y-4">
+        <legend class="sr-only">Your details</legend>
+        <h2 class="font-semibold">Your details</h2>
+        {% include 'components/form_field.html' with field=form.full_name %}
+        <div class="grid gap-4 sm:grid-cols-2">
+          {% include 'components/form_field.html' with field=form.email %}
+          {% include 'components/form_field.html' with field=form.phone %}
+        </div>
+      </fieldset>
+
+      <fieldset class="card space-y-4">
+        <legend class="sr-only">The job</legend>
+        <h2 class="font-semibold">The job</h2>
+        {% include 'components/form_field.html' with field=form.service %}
+        <div class="grid gap-4 sm:grid-cols-2">
+          {% include 'components/form_field.html' with field=form.preferred_date %}
+          {% include 'components/form_field.html' with field=form.preferred_time %}
+        </div>
+        {% include 'components/form_field.html' with field=form.description %}
+      </fieldset>
+
+      <fieldset class="card space-y-4">
+        <legend class="sr-only">The property</legend>
+        <h2 class="font-semibold">The property</h2>
+        {% include 'components/form_field.html' with field=form.address %}
+        {% include 'components/form_field.html' with field=form.property_type %}
+      </fieldset>
+
+      <div>
+        <div class="flex items-start gap-3">
+          {{ form.privacy_consent }}
+          <label for="{{ form.privacy_consent.id_for_label }}" class="text-sm">I agree to the <a href="{% url 'core:privacy' %}" class="text-brand underline" target="_blank" rel="noopener">privacy policy</a>. <span class="text-red-700" aria-hidden="true">*</span></label>
+        </div>
+        {% for error in form.privacy_consent.errors %}<p class="mt-1 text-sm text-red-700" role="alert">{{ error }}</p>{% endfor %}
+      </div>
+
+      <button type="submit" class="btn btn-primary w-full sm:w-auto">Send request</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

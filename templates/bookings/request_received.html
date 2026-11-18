@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Request received | {{ business.name }}{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="container-x max-w-2xl">
+    <div class="rounded-xl border border-mint bg-white p-6 sm:p-8">
+      <p class="text-sm font-semibold text-brand">Request received</p>
+      <h1 class="h1 mt-1">Thank you, we have your request</h1>
+      {% if request_id %}<p class="mt-3 text-sm text-muted">Your reference number is <strong class="text-ink">#{{ request_id }}</strong>.</p>{% endif %}
+      <p class="mt-4 leading-relaxed">This is not a confirmed appointment yet. Our team will review your request and contact you to agree the date, time and details.</p>
+      <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+        <a href="{% url 'core:home' %}" class="btn btn-primary">Back to home</a>
+        <a href="{% url 'services:list' %}" class="btn btn-outline">Browse services</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -32,6 +32,9 @@
   .card-sage { @apply rounded-xl border border-sage-line bg-sage-card p-6; }
   .nav-link { @apply text-sm font-medium text-ink hover:text-brand; }
   .nav-active { @apply text-brand; }
+  .form-input { @apply block w-full rounded-lg border border-line bg-white px-3 py-2 text-sm text-ink shadow-sm focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/30; }
+  .form-input[aria-invalid="true"] { @apply border-red-600; }
+  .form-check { @apply mt-0.5 h-4 w-4 rounded border-line text-brand focus:ring-brand; }  
   .h1 { @apply text-3xl font-bold leading-tight sm:text-4xl; }
   .h2 { @apply text-2xl font-bold sm:text-3xl; }
 }

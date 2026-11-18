@@ -1,12 +1,10 @@
 from django.urls import path
-from django.views.generic import TemplateView
+
+from .views import RequestCreateView, RequestReceivedView
 
 app_name = 'bookings'
 
 urlpatterns = [
-    path(
-        'request/',
-        TemplateView.as_view(template_name='bookings/request.html'),
-        name='request',
-    ),
+    path('request/', RequestCreateView.as_view(), name='request'),
+    path('request/received/', RequestReceivedView.as_view(), name='received'),
 ]
