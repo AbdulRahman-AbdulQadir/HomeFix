@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Page not found | {{ business.name }}{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="container-x max-w-2xl text-center">
+    <p class="text-sm font-semibold text-brand">Error 404</p>
+    <h1 class="h1 mt-1">Page not found</h1>
+    <p class="mt-3 text-muted">Sorry, we could not find the page you were looking for.</p>
+    <div class="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+      <a href="{% url 'core:home' %}" class="btn btn-primary">Back to home</a>
+      <a href="{% url 'services:list' %}" class="btn btn-outline">Browse services</a>
+    </div>
+  </div>
+</section>
+{% endblock %}
