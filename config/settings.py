@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 
+import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -35,7 +36,11 @@ ALLOWED_HOSTS = [
     for h in os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',')
     if h.strip()
 ]
+# Render sets this automatically on its servers.
+RENDER_HOST = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 
+if RENDER_HOST:
+    ALLOWED_HOSTS.append(RENDER_HOST)
 
 # Application definition
 
@@ -53,6 +58,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -91,7 +97,14 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+# Production database: DATABASE_URL replaces local SQLite.
+if os.environ.get('DATABASE_URL'):
+    DATABASES = {
+        'default': dj_database_url.parse(
+            os.environ['DATABASE_URL'],
+            conn_max_age=600,
+        )
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -145,6 +158,8 @@ CSRF_TRUSTED_ORIGINS = [
     for o in os.environ.get('DJANGO_CSRF_TRUSTED_ORIGINS', '').split(',')
     if o.strip()
 ]
+if RENDER_HOST:
+    CSRF_TRUSTED_ORIGINS.append(f'https://{RENDER_HOST}')
 
 # Production security: active only when DEBUG is off.
 if not DEBUG:
@@ -154,3 +169,11 @@ if not DEBUG:
     CSRF_COOKIE_SECURE = True
     SECURE_HSTS_SECONDS = 3600  # raise to 31536000 once HTTPS is confirmed working
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    STORAGES = {
+        'default': {
+            'BACKEND': 'django.core.files.storage.FileSystemStorage',
+        },
+        'staticfiles': {
+            'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+        },
+    }
