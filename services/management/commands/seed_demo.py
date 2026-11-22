@@ -30,7 +30,7 @@ REQUESTS = [
     ('Maya Demo', 'maya.demo@example.com', 'general-repairs', 'pending', 5),
     ('Liam Demo', 'liam.demo@example.com', 'furniture-assembly', 'reviewing', 7),
     ('Noor Demo', 'noor.demo@example.com', 'painting-improvements', 'scheduled', 10),
-    ('Omar Demo', 'omar.demo@example.com', 'home-installations', 'completed', 2),
+    ('Omar Demo', 'omar.demo@example.com', 'home-installations', 'completed', -3),
 ]
 
 
