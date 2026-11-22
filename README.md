@@ -66,7 +66,26 @@ Submitting a request does not automatically confirm an appointment.
 
 ## Project Status
 
-Currently in the initial development and planning stage. Features will be implemented and tested incrementally.
+The MVP is complete and deployed.
+
+**Live demo:** https://homefix-t8km.onrender.com
+(Hosted on a free instance, so the first load after inactivity may take about a minute.)
+
+## Local Setup
+
+1. Clone the repository and create a virtual environment.
+2. `pip install -r requirements.txt`
+3. `python manage.py migrate`
+4. `python manage.py seed_demo` (optional demo data)
+5. `python manage.py createsuperuser`
+6. `python manage.py runserver`
+
+Run the tests with `python manage.py test`.
+
+## Deployment
+
+Deployed on Render with a Neon PostgreSQL database. Production settings read
+`DJANGO_SECRET_KEY`, `DJANGO_DEBUG`, `DATABASE_URL` and related environment variables. No secrets are stored in the repository.
 
 ## Project Purpose
 
