@@ -1,96 +1,139 @@
-# HomeFix – Home Maintenance Management System
+# HomeFix – Home Maintenance Request Management System
 
-HomeFix is a self-initiated portfolio project that demonstrates a web-based platform for a fictional general home maintenance company.
+HomeFix is a self-initiated portfolio project: a web application for a **fictional** general home maintenance company in Edmonton, Alberta. Customers can browse services and send a service request. Staff review requests, update their status and track progress.
 
-The platform allows customers to explore home maintenance services and submit service requests. It also provides an administrative system for reviewing requests, managing services, and tracking maintenance jobs.
-
-## Project Goals
-
-- Build a responsive and professional business website.
-- Allow customers to browse maintenance services.
-- Provide a simple service request submission process.
-- Allow administrators to manage service requests and their statuses.
-- Demonstrate practical Django development skills.
-
-## Main Features
-
-### Customer Website
-- Home page
-- About page
-- Services listing
-- Individual service details
-- Service request form
-- Contact page
-- Privacy policy
-
-### Management System
-- View and manage service requests
-- Search and filter requests
-- Review customer and property information
-- Update request and job statuses
-- Add internal notes
-- Manage maintenance services
-- View a basic management dashboard
-
-## Maintenance Services
-
-The fictional company offers general home maintenance services, including:
-
-- General household repairs
-- Furniture assembly
-- Painting and minor improvements
-- Door, cabinet, and fixture repairs
-- Home installations
-- Basic property maintenance
-
-Specialized plumbing and electrical work will only be represented where appropriately qualified professionals are involved.
-
-## Technology Stack
-
-- **Backend:** Python, Django
-- **Frontend:** HTML, Django Templates (DTL), Tailwind CSS, JavaScript
-- **Interactivity:** Alpine.js where useful
-- **Database:** SQLite for development, PostgreSQL for production
-- **Version Control:** Git and GitHub
-
-## Booking Workflow
-
-1. Customer selects a maintenance service.
-2. Customer submits a service request.
-3. Administrator reviews the request.
-4. Company contacts the customer.
-5. Appointment details are agreed upon.
-6. Job progress and completion are managed.
-
-Submitting a request does not automatically confirm an appointment.
-
-## Project Status
-
-The MVP is complete and deployed.
+> **Demonstration project.** HomeFix is not a real business or a client commission. All customers, requests and testimonials are sample content.
 
 **Live demo:** https://homefix-t8km.onrender.com
-(Hosted on a free instance, so the first load after inactivity may take about a minute.)
+(Free hosting: the first load after inactivity can take about a minute.)
 
-## Local Setup
+## Screenshots
 
-1. Clone the repository and create a virtual environment.
-2. `pip install -r requirements.txt`
-3. `python manage.py migrate`
-4. `python manage.py seed_demo` (optional demo data)
-5. `python manage.py createsuperuser`
-6. `python manage.py runserver`
+### Customer website
+
+![Homepage](docs/screenshots/01-home-desktop.png)
+
+| Services | Service details |
+|---|---|
+| ![Services](docs/screenshots/02-services-desktop.png) | ![Service detail](docs/screenshots/03-service-detail-desktop.png) |
+
+| Request form | Request received |
+|---|---|
+| ![Request form](docs/screenshots/04-request-form-desktop.png) | ![Request received](docs/screenshots/05-request-received-desktop.png) |
+
+### Staff tools
+
+![Dashboard](docs/screenshots/06-dashboard-desktop.png)
+
+| Request list | Request details and internal notes |
+|---|---|
+| ![Admin request list](docs/screenshots/07-admin-requests-desktop.png) | ![Admin request detail](docs/screenshots/08-admin-request-detail-desktop.png) |
+
+### Mobile
+
+<p>
+  <img src="docs/screenshots/09-home-mobile.png" alt="Mobile homepage" width="250">
+  <img src="docs/screenshots/10a-mobile-menu.png" alt="Mobile menu" width="250">
+  <img src="docs/screenshots/10b-mobile-form.png" alt="Mobile request form" width="250">
+</p>
+
+## Features
+
+**Customer website**
+- Responsive pages: home, about, services, service details, contact, privacy policy
+- Services are managed in the database and shown dynamically
+- Service request form with validation: required fields, phone format, no past dates
+- Basic spam and duplicate protection: honeypot field and a 24-hour duplicate check
+- Clear confirmation that a request was received, not a booked appointment
+- Custom 404 and 500 pages
+
+**Staff tools**
+- Staff-only dashboard: total, pending, scheduled and completed requests, plus recent requests
+- Request management in Django Admin: search, filters, status updates and internal notes
+- Service management: add, edit, reorder, or hide services without deleting them
+- Eight request statuses: Pending, Reviewing, Contacted, Scheduled, In progress, Completed, Cancelled, Declined
+
+## How a request works
+
+1. The customer chooses a service and sends a request.
+2. The request is saved as **Pending**. No appointment is confirmed.
+3. Staff review it and contact the customer.
+4. Date, time and scope are agreed separately.
+5. Staff update the status as the job progresses.
+
+## Technology
+
+- **Backend:** Python, Django 5.2
+- **Frontend:** Django Templates, Tailwind CSS v4, Alpine.js
+- **Database:** SQLite (development), PostgreSQL on Neon (production)
+- **Hosting:** Render (free instance), WhiteNoise for static files
+- **Testing:** Django test framework, 29 automated tests
+- **Version control:** Git and GitHub
+
+## Project structure
+
+- `core` – public pages and shared business information
+- `services` – maintenance services and the demo-data command
+- `bookings` – service requests, form validation and the staff dashboard
+- `config` – Django settings and URL configuration
+- `templates/` – shared layout and reusable components
+- `frontend/input.css` – Tailwind source; the compiled CSS is in `static/css/`
+
+## Local setup (Windows PowerShell)
+
+```powershell
+git clone https://github.com/AbdulRahman-AbdulQadir/HomeFix.git
+cd HomeFix
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py seed_demo      # optional demo data
+python manage.py createsuperuser
+python manage.py runserver
+```
 
 Run the tests with `python manage.py test`.
 
+The site is then at http://127.0.0.1:8000/ and the admin at `/admin/`.
+
+`seed_demo` can be run repeatedly without creating duplicates, but it resets the six demo services to their original content each time.
+
+**Optional: rebuild the CSS** after changing templates or `frontend/input.css`, using the standalone Tailwind CLI:
+
+```powershell
+tailwindcss -i frontend/input.css -o static/css/styles.css --minify
+```
+
+## Configuration
+
+Production settings come from environment variables. No secrets are stored in the repository.
+
+| Variable | Purpose |
+|---|---|
+| `DJANGO_SECRET_KEY` | Required when debug is off |
+| `DJANGO_DEBUG` | `1` for development, `0` in production |
+| `DATABASE_URL` | PostgreSQL connection (SQLite is used if unset) |
+| `DJANGO_ALLOWED_HOSTS` | Comma-separated hostnames |
+| `DJANGO_CSRF_TRUSTED_ORIGINS` | Comma-separated HTTPS origins |
+
 ## Deployment
 
-Deployed on Render with a Neon PostgreSQL database. Production settings read
-`DJANGO_SECRET_KEY`, `DJANGO_DEBUG`, `DATABASE_URL` and related environment variables. No secrets are stored in the repository.
+Deployed on Render with a Neon PostgreSQL database. `build.sh` installs dependencies, collects static files and applies migrations. With debug off, Django enforces HTTPS redirects, secure cookies and HSTS.
 
-## Project Purpose
+## Known limitations
 
-HomeFix is a demonstration project created for learning, practical development experience, and portfolio presentation. It is not a real client project or an operating maintenance company.
+- The free Render instance sleeps when idle, so the first request can be slow.
+- Request management uses Django Admin instead of a custom interface.
+- No email notifications, online payments or customer accounts (out of scope for the MVP).
 
-## Future Improvements
+## What I learned
 
-Potential improvements will be considered after the first working MVP.
+- Planning a project and doing that step by step.
+- Trying to fit like real bussiness needs.
+- Preparing a Django project for production: environment variables, PostgreSQL, static files and security settings.
+- Using AI tools like Claude, ChatGPT, and Gemini.
+
+## Project purpose
+
+HomeFix was created for learning, practical development experience and portfolio presentation. It is not a real client project or an operating company.
