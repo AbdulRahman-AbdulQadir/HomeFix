@@ -9,9 +9,11 @@ HomeFix is a self-initiated portfolio project: a web application for a **fiction
 
 ## Screenshots
 
-### Customer website
+### website
 
-![Homepage](docs/screenshots/01-home-desktop.png)
+<p align="center">
+  <img src="docs/screenshots/01-home-desktop.png" alt="HomeFix homepage" width="650">
+</p>
 
 | Services | Service details |
 |---|---|
@@ -23,7 +25,9 @@ HomeFix is a self-initiated portfolio project: a web application for a **fiction
 
 ### Staff tools
 
-![Dashboard](docs/screenshots/06-dashboard-desktop.png)
+<p align="center">
+  <img src="docs/screenshots/06-dashboard-desktop.png" alt="Staff dashboard" width="650">
+</p>
 
 | Request list | Request details and internal notes |
 |---|---|
@@ -31,10 +35,10 @@ HomeFix is a self-initiated portfolio project: a web application for a **fiction
 
 ### Mobile
 
-<p>
-  <img src="docs/screenshots/09-home-mobile.png" alt="Mobile homepage" width="250">
-  <img src="docs/screenshots/10a-mobile-menu.png" alt="Mobile menu" width="250">
-  <img src="docs/screenshots/10b-mobile-form.png" alt="Mobile request form" width="250">
+<p align="center">
+  <img src="docs/screenshots/09-home-mobile.png" alt="Mobile homepage" width="180">
+  <img src="docs/screenshots/10a-mobile-menu.png" alt="Mobile navigation menu" width="180">
+  <img src="docs/screenshots/10b-mobile-form.png" alt="Mobile request form" width="180">
 </p>
 
 ## Features
