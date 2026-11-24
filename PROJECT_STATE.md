@@ -28,11 +28,11 @@
 - [x] M6 Management dashboard (staff-only metrics and recent requests)
 - [x] M7 Testing and security (29 automated tests, production security settings, live smoke test)
 - [x] M8 Deployment (Render + Neon PostgreSQL, WhiteNoise, HTTPS)
+- [x] Update README (screenshots, live link, setup instructions)
+- [x] Capture desktop and mobile screenshots
 
 ## Remaining
 
-- [ ] Update README (screenshots, live link, setup instructions)
-- [ ] Capture desktop and mobile screenshots
 - [ ] Record project demonstration video
 - [ ] Write portfolio case study
 - [ ] Update GitHub, LinkedIn, Upwork and Freelancer descriptions

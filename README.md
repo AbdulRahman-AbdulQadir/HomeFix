@@ -6,6 +6,7 @@ HomeFix is a self-initiated portfolio project: a web application for a **fiction
 
 **Live demo:** https://homefix-t8km.onrender.com
 (Free hosting: the first load after inactivity can take about a minute.)
+**Demo video:** https://youtu.be/-yUHRZT3Cvk
 
 ## Screenshots
 
